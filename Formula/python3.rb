@@ -43,7 +43,7 @@ class Python3 < Formula
   depends_on "gdbm" => :recommended
   depends_on "openssl"
   depends_on "xz" => :recommended # for the lzma module added in 3.3
-  depends_on "homebrew/dupes/tcl-tk" => :optional
+  depends_on "tcl-tk" => :optional
   depends_on :x11 if build.with?("tcl-tk") && Tab.for_name("homebrew/dupes/tcl-tk").with?("x11")
   depends_on "sphinx-doc" => [:build, :optional]
 
@@ -91,7 +91,7 @@ class Python3 < Formula
   # setuptools remembers the build flags python is built with and uses them to
   # build packages later. Xcode-only systems need different flags.
   pour_bottle? do
-    reason <<-EOS.undent
+    reason <<-EOS
     The bottle needs the Apple Command Line Tools to be installed.
       You can install them, if desired, with:
         xcode-select --install
@@ -286,7 +286,7 @@ class Python3 < Formula
     end
 
     cfg = lib_cellar/"distutils/distutils.cfg"
-    cfg.atomic_write <<-EOF.undent
+    cfg.atomic_write <<-EOF
       [install]
       prefix=#{HOMEBREW_PREFIX}
 
@@ -301,7 +301,7 @@ class Python3 < Formula
   end
 
   def sitecustomize
-    <<-EOF.undent
+    <<-EOF
       # This file is created by Homebrew and is executed on each python startup.
       # Don't print from here, or else python command line scripts may fail!
       # <https://github.com/Homebrew/brew/blob/master/docs/Homebrew-and-Python.md>
@@ -339,7 +339,7 @@ class Python3 < Formula
   end
 
   def caveats
-    text = <<-EOS.undent
+    text = <<-EOS
       Pip, setuptools, and wheel have been installed. To update them
         pip3 install --upgrade pip setuptools wheel
 
@@ -353,7 +353,7 @@ class Python3 < Formula
     EOS
 
     # Tk warning only for 10.6
-    tk_caveats = <<-EOS.undent
+    tk_caveats = <<-EOS
 
       Apple's Tcl/Tk is not recommended for use with Python on Mac OS X 10.6.
       For more information see: https://www.python.org/download/mac/tcltk/
